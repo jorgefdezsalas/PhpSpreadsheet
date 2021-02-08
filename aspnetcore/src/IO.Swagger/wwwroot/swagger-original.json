@@ -1,0 +1,560 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "iwOS",
+    "description" : "API for iwOS food delivery & ticketing",
+    "contact" : {
+      "email" : "info@iwos.com"
+    },
+    "version" : "1.0.0-oas3"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/franbolivar/iwos_ticketing/1.0"
+  } ],
+  "paths" : {
+    "/register_ticket_by_secret" : {
+      "post" : {
+        "tags" : [ "ticket" ],
+        "summary" : "Register ticket by secret",
+        "operationId" : "registerTicketBySecret",
+        "requestBody" : {
+          "description" : "Ticket identificator",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TicketInputSecret"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/TicketOutput"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid input",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/TicketOutput"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "422" : {
+            "description" : "Unprocessable entity"
+          }
+        },
+        "security" : [ {
+          "api_token" : [ ]
+        } ]
+      }
+    },
+    "/register_ticket_by_data" : {
+      "post" : {
+        "tags" : [ "ticket" ],
+        "summary" : "Register tickets by data",
+        "operationId" : "registerTicketByData",
+        "requestBody" : {
+          "description" : "Ticket identificator",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TicketInputData"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/TicketOutput"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid input",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/TicketOutput"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "422" : {
+            "description" : "Unprocessable entity"
+          }
+        },
+        "security" : [ {
+          "api_token" : [ ]
+        } ]
+      }
+    },
+    "/events" : {
+      "get" : {
+        "tags" : [ "event" ],
+        "summary" : "Get list of events",
+        "operationId" : "getEvents",
+        "requestBody" : {
+          "description" : "Filtering options and output language",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EventsInput"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/EventsOutput"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          }
+        },
+        "security" : [ {
+          "api_token" : [ ]
+        } ]
+      }
+    },
+    "/event" : {
+      "get" : {
+        "tags" : [ "event" ],
+        "summary" : "Get single event information",
+        "operationId" : "getEvent",
+        "requestBody" : {
+          "description" : "Event identificator",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EventInput"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/EventOutput"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          }
+        },
+        "security" : [ {
+          "api_token" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "TicketInputSecret" : {
+        "required" : [ "secret" ],
+        "type" : "object",
+        "properties" : {
+          "secret" : {
+            "type" : "string",
+            "example" : "ampHbzFGWHdXMU5vS2x5cXRNcWJvakk5N0tNY1VzWlZZeVd0aUE5M0dGSnlyUW44b2xBNE53QjFxM0NjMFhQeEIwOGl6K044cnNUUmc1TWxodDVLcEhaY1RNRHN3clJvdHQ2bTdML0orR2M9"
+          },
+          "only_read" : {
+            "type" : "integer",
+            "format" : "boolean",
+            "example" : 0,
+            "default" : 0
+          }
+        }
+      },
+      "TicketInputData" : {
+        "required" : [ "order_id", "product_id", "schedule_id" ],
+        "type" : "object",
+        "properties" : {
+          "order_id" : {
+            "type" : "integer",
+            "example" : 14
+          },
+          "product_id" : {
+            "type" : "integer",
+            "example" : 27
+          },
+          "schedule_id" : {
+            "type" : "integer",
+            "example" : 93547
+          },
+          "only_read" : {
+            "type" : "integer",
+            "format" : "boolean",
+            "example" : 0,
+            "default" : 0
+          }
+        }
+      },
+      "EventsInput" : {
+        "type" : "object",
+        "properties" : {
+          "min_date" : {
+            "type" : "string",
+            "example" : "2018-04-05"
+          },
+          "max_date" : {
+            "type" : "string",
+            "example" : "2018-04-12"
+          },
+          "language" : {
+            "type" : "string",
+            "example" : "en",
+            "default" : "es"
+          }
+        }
+      },
+      "EventInput" : {
+        "required" : [ "product_id", "schedule_id" ],
+        "type" : "object",
+        "properties" : {
+          "product_id" : {
+            "type" : "integer",
+            "example" : 27
+          },
+          "schedule_id" : {
+            "type" : "integer",
+            "example" : 93547
+          },
+          "language" : {
+            "type" : "string",
+            "example" : "en",
+            "default" : "es"
+          }
+        }
+      },
+      "TicketOutput" : {
+        "required" : [ "error_code", "message", "success", "ticket" ],
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "The operation has been made succesfully or not",
+            "example" : false
+          },
+          "error_code" : {
+            "type" : "integer",
+            "description" : "Error code",
+            "example" : 6
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Humanized error",
+            "example" : "already used ticket"
+          },
+          "ticket" : {
+            "$ref" : "#/components/schemas/Ticket"
+          }
+        },
+        "example" : {
+          "ticket" : {
+            "product" : {
+              "date" : "2018-04-14 16:30",
+              "image" : "https://iwos.com/img/event/27.png",
+              "price" : 25.5,
+              "name" : "Pool Party"
+            },
+            "uds" : 2,
+            "user" : {
+              "name" : "John Doe",
+              "email" : "john@doe.com"
+            }
+          },
+          "success" : false,
+          "error_code" : 6,
+          "message" : "already used ticket"
+        }
+      },
+      "EventsOutput" : {
+        "required" : [ "current", "next", "previous" ],
+        "type" : "object",
+        "properties" : {
+          "current" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EventInfo"
+            }
+          },
+          "next" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EventInfo"
+            }
+          },
+          "previous" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EventInfo"
+            }
+          }
+        },
+        "example" : {
+          "next" : [ null, null ],
+          "current" : [ {
+            "date" : "2018-04-14 16:30",
+            "product_id" : 27,
+            "name" : "Pool Party",
+            "schedule_id" : 1423
+          }, {
+            "date" : "2018-04-14 16:30",
+            "product_id" : 27,
+            "name" : "Pool Party",
+            "schedule_id" : 1423
+          } ],
+          "previous" : [ null, null ]
+        }
+      },
+      "EventOutput" : {
+        "required" : [ "assistants", "product", "stock" ],
+        "type" : "object",
+        "properties" : {
+          "product" : {
+            "$ref" : "#/components/schemas/Product"
+          },
+          "stock" : {
+            "minimum" : 0,
+            "type" : "integer",
+            "example" : 50
+          },
+          "assistants" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Assistant"
+            }
+          }
+        },
+        "example" : {
+          "assistants" : [ {
+            "uds" : 2,
+            "registered_uds" : 1,
+            "user" : {
+              "name" : "John Doe",
+              "email" : "john@doe.com"
+            },
+            "order" : 1423
+          }, {
+            "uds" : 2,
+            "registered_uds" : 1,
+            "user" : {
+              "name" : "John Doe",
+              "email" : "john@doe.com"
+            },
+            "order" : 1423
+          } ],
+          "product" : {
+            "date" : "2018-04-14 16:30",
+            "image" : "https://iwos.com/img/event/27.png",
+            "price" : 25.5,
+            "name" : "Pool Party"
+          },
+          "stock" : 50
+        }
+      },
+      "Ticket" : {
+        "required" : [ "product", "uds", "user" ],
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "product" : {
+            "$ref" : "#/components/schemas/Product"
+          },
+          "uds" : {
+            "type" : "integer",
+            "example" : 2
+          }
+        },
+        "example" : {
+          "product" : {
+            "date" : "2018-04-14 16:30",
+            "image" : "https://iwos.com/img/event/27.png",
+            "price" : 25.5,
+            "name" : "Pool Party"
+          },
+          "uds" : 2,
+          "user" : {
+            "name" : "John Doe",
+            "email" : "john@doe.com"
+          }
+        }
+      },
+      "User" : {
+        "required" : [ "email", "name" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "John Doe"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "john@doe.com"
+          }
+        },
+        "example" : {
+          "name" : "John Doe",
+          "email" : "john@doe.com"
+        }
+      },
+      "Product" : {
+        "required" : [ "date", "image", "name", "price" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "Pool Party"
+          },
+          "date" : {
+            "type" : "string",
+            "example" : "2018-04-14 16:30"
+          },
+          "price" : {
+            "type" : "number",
+            "example" : 25.5
+          },
+          "image" : {
+            "type" : "string",
+            "example" : "https://iwos.com/img/event/27.png"
+          }
+        },
+        "example" : {
+          "date" : "2018-04-14 16:30",
+          "image" : "https://iwos.com/img/event/27.png",
+          "price" : 25.5,
+          "name" : "Pool Party"
+        }
+      },
+      "EventInfo" : {
+        "required" : [ "date", "name", "product_id", "schedule_id" ],
+        "type" : "object",
+        "properties" : {
+          "product_id" : {
+            "type" : "integer",
+            "example" : 27
+          },
+          "schedule_id" : {
+            "type" : "integer",
+            "example" : 1423
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Pool Party"
+          },
+          "date" : {
+            "type" : "string",
+            "example" : "2018-04-14 16:30"
+          }
+        },
+        "example" : {
+          "date" : "2018-04-14 16:30",
+          "product_id" : 27,
+          "name" : "Pool Party",
+          "schedule_id" : 1423
+        }
+      },
+      "Assistant" : {
+        "required" : [ "order", "registered_uds", "uds", "user" ],
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "order" : {
+            "type" : "integer",
+            "example" : 1423
+          },
+          "uds" : {
+            "minimum" : 0,
+            "type" : "integer",
+            "example" : 2
+          },
+          "registered_uds" : {
+            "minimum" : 0,
+            "type" : "integer",
+            "example" : 1
+          }
+        },
+        "example" : {
+          "uds" : 2,
+          "registered_uds" : 1,
+          "user" : {
+            "name" : "John Doe",
+            "email" : "john@doe.com"
+          },
+          "order" : 1423
+        }
+      }
+    },
+    "securitySchemes" : {
+      "api_token" : {
+        "type" : "apiKey",
+        "name" : "token",
+        "in" : "header"
+      }
+    }
+  }
+}
